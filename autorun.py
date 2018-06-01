@@ -105,7 +105,7 @@ def main():
         dict_writer.writerows(output)
         file_obj.flush()
     # print('old:' + str(output))
-    time.sleep(2)
+    time.sleep(5*60)
     main()
 
 

@@ -1,11 +1,11 @@
 "# Desktop_application_catcher"
 
-INTRODUCTION
+**INTRODUCTION**
 
     This application only for Win system
     This application track your activities and make a log for later use.
 
-HOW TO USE
+**HOW TO USE**
 
     Enter your filter application name inside the 'filter.txt'
     Run the autorun.exe
@@ -13,7 +13,7 @@ HOW TO USE
     It will run on your back ground and accourding to your filter list it will filter the
     application and make a csv file in your Documents directory(Win).
 
-Make Exe for Win 32
+**Make Exe for Win 32**
 
     Open cmd
     Types given commands
@@ -25,9 +25,15 @@ Make Exe for Win 32
 
     Go to your main file directory (Where 'if __name__ == "__main__"' is present)
 
-    'pyinstaller --onefile --windowed <main_file_name'
+    'pyinstaller --onefile --windowed --icon=<icon_name.ico> <main_file_name>'
 
     Go inside of dist folder and there you can find .exe file
 
     Reset you system to 64bit
     'set CONDA_FORCE_32BIT='
+
+
+**Reference**
+
+    Image converter to .ico
+    https://redketchup.io/icon/convert
