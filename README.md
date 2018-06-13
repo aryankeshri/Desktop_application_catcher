@@ -32,6 +32,13 @@
     Reset you system to 64bit
     'set CONDA_FORCE_32BIT='
 
+**Run Application when system restart/reboot Win System**
+    
+    In windows 
+    1. run
+    2. type 'shell:startup'
+    3. create shortcut of your application
+    4. copy and past inside shortcut directory.
 
 **Reference**
 
