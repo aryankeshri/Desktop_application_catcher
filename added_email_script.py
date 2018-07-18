@@ -8,7 +8,7 @@ from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import COMMASPACE, formatdate
-from datetime import datetime
+from datetime import datetime, date
 from os.path import basename
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -21,8 +21,8 @@ GetWindowTextLength = ctypes.windll.user32.GetWindowTextLengthW
 IsWindowVisible = ctypes.windll.user32.IsWindowVisible
 
 
-date = datetime.now().date()
-filename = 'Report of ' + str(date.day) + '-' + str(date.month) + '-' + str(date.year) + '.csv'
+today_date = datetime.now().date()
+filename = 'Report of ' + str(today_date.day) + '-' + str(today_date.month) + '-' + str(today_date.year) + '.csv'
 path = os.path.join(*[os.getenv('USERPROFILE'), 'Documents', filename])
 file_obj = open(path, 'a', newline='')
 
@@ -139,30 +139,29 @@ def generate_new_file(now_date):
     global file_obj
     global filename
     global path
-    global date
+    global today_date
     global FROM_EMAIL
     global TO_EMAIL_LIST
 
     file_obj.close()
     # send mail attached with current file
     try:
-        subject = 'Report of ' + str(date.day) + '-' + str(date.month) + '-' + str(date.year)
+        subject = 'Report of ' + str(today_date.day) + '-' + str(today_date.month) + '-' + str(today_date.year)
         send_mail(FROM_EMAIL, list(TO_EMAIL_LIST), subject, files=[path])
     except ConnectionRefusedError as e:
         # print(e)
         pass
 
-    date = now_date
-    filename = 'Report of ' + str(date.day) + '-' + str(date.month) + '-' + str(date.year) + '.csv'
+    filename = 'Report of ' + str(now_date.day) + '-' + str(now_date.month) + '-' + str(now_date.year) + '.csv'
     path = os.path.join(*[os.getenv('USERPROFILE'), 'Documents', filename])
     file_obj = open(path, 'a', newline='')
-    time.sleep(5)
+    time.sleep(2)
 
 
 def main():
     t1 = datetime.now()
     global ret_list
-    global date
+    global today_date
     output = []
     a = AppOperations()
     for i, item in enumerate(a.modified_list()):
@@ -178,7 +177,7 @@ def main():
     t2 = datetime.now()
     print(t2-t1)
     now_date = datetime.now().date()
-    if date != now_date:
+    if (today_date != now_date) and (date.today().weekday() == 0):
         generate_new_file(now_date)
     else:
         time.sleep(30)
