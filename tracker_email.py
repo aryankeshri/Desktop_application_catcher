@@ -1,6 +1,7 @@
 import copy
 import csv
 import ctypes
+import logging
 import os
 import smtplib
 import time
@@ -10,6 +11,15 @@ from email.mime.text import MIMEText
 from email.utils import COMMASPACE, formatdate
 from datetime import datetime, date
 from os.path import basename
+
+
+handler = logging.FileHandler("tacker.log")
+formatter = logging.Formatter(fmt='%(asctime)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S', style='%')
+handler.setFormatter(formatter)
+root = logging.getLogger()
+root.setLevel(os.environ.get("LOGLEVEL", "INFO"))
+root.addHandler(handler)
+
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -185,4 +195,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as error:
+        logging.exception(error)
+        main()
