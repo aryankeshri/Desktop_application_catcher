@@ -14,9 +14,9 @@ root = logging.getLogger()
 root.setLevel(os.environ.get("LOGLEVEL", "INFO"))
 root.addHandler(handler)
 
-HOST = 'ftp.insemitech.in'
-USERNAME = 'insemitech.in'
-PASSWORD = 'insemi@2018'
+HOST = ''
+USERNAME = ''
+PASSWORD = ''
 
 
 class ClientOperation:
