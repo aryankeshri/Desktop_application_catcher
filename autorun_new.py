@@ -101,22 +101,22 @@ class AppOperations:
 
 def main():
     global ret_list
-    output = []
-    a = AppOperations()
-    # output = a.return_list()
-    for i, item in enumerate(a.modified_list()):
-        if 'etime' in item:
-            output.append(item)
-            ret_list.pop(i)
+    while True:
+        output = []
+        a = AppOperations()
+        # output = a.return_list()
+        for i, item in enumerate(a.modified_list()):
+            if 'etime' in item:
+                output.append(item)
+                ret_list.pop(i)
 
-    if output:
-        keys = output[0].keys()
-        dict_writer = csv.DictWriter(file_obj, keys)
-        dict_writer.writerows(output)
-        file_obj.flush()
-    # print('old:' + str(output))
-    time.sleep(2)
-    main()
+        if output:
+            keys = output[0].keys()
+            dict_writer = csv.DictWriter(file_obj, keys)
+            dict_writer.writerows(output)
+            file_obj.flush()
+        # print('old:' + str(output))
+        time.sleep(2)
 
 
 if __name__ == "__main__":
